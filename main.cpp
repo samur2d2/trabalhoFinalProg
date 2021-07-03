@@ -9,6 +9,7 @@
 #include <string>
 #include <iomanip>
 #include "investimento.h"
+#include "linkedList.h"
 
 using namespace std;
 
@@ -79,6 +80,29 @@ char RunAgain(){
 int main() {
     cout << fixed << setprecision(2);
 
+    tLista* idades = new tLista;
+
+    iniciarLista(idades);
+
+    int joao=10, maria=20, marcos=30, julho=40;
+    incluirElemento(idades, joao);
+    incluirElemento(idades, maria);
+    incluirElemento(idades, marcos);
+
+
+    cout << "elemento: ";
+    printarLista(idades);
+
+    incluirElemento(idades, julho);
+    cout << "elemento: ";
+    printarLista(idades);
+
+    excluirPosicao(idades, 2);
+    cout << "elemento: ";
+    printarLista(idades);
+
+    system("pause");
+
     FirstWindow();
 
     SecondWindow();
@@ -96,5 +120,5 @@ int main() {
         system("pause");
         RunAgain();
 
-    }while ((close ==true ));
+    }while ((close == true));
 }
