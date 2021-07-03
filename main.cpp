@@ -10,6 +10,7 @@
 #include <iomanip>
 #include "investimento.h"
 #include "linkedList.h"
+#include "arquivo.h"
 
 using namespace std;
 
@@ -28,7 +29,7 @@ void FirstWindow(){
     cout << "\t |                                         |" << endl;
     cout << "\t |                                         |" << endl;
     cout << "\t +-----------------------------------------+" << endl;
-    cout << "\t |                 Samuel Ribeiro - 05/21  |" << endl;
+    cout << "\t |                 Samuel Ribeiro - 07/21  |" << endl;
     cout << "\t +-----------------------------------------+" << endl;
     for (int i=0; i<3; i++){cout << endl;}
     cout << "\t Please enter Y to continue or N to exit: ";
@@ -61,6 +62,34 @@ void SecondWindow(){
     cout << "\t" << system("pause");
 }
 //-----------------------------------------------------------------------------------------------------------------
+int ThirdWindow(){
+    int option=0;
+    system("cls");
+    for (int i=0; i<3; i++){cout << endl;}
+    cout << "\t +------------------------------------------------+" << endl;
+    cout << "\t |                                                |" << endl;
+    cout << "\t |     WHAT OPERATION DO YOU WANT TO PERFORM?     |" << endl;
+    cout << "\t |                                                |" << endl;
+    cout << "\t +------------------------------------------------+" << endl;
+    cout << "\t |                                                |" << endl;
+    cout << "\t |   TYPE:                                        |" << endl;
+    cout << "\t |                                                |" << endl;
+    cout << "\t |    1 TO WRITE IN A NEW DATABASE                |" << endl;
+    cout << "\t |       - old information will be lost           |" << endl;
+    cout << "\t |                                                |" << endl;
+    cout << "\t |    2 TO WRITE IN AN EXISTING DATABASE          |" << endl;
+    cout << "\t |       - add new information to end of file     |" << endl;
+    cout << "\t |                                                |" << endl;
+    cout << "\t |    3 TO READ AN EXISTING DATABASE              |" << endl;
+    cout << "\t |       - open an existing file                  |" << endl;
+    cout << "\t |                                                |" << endl;
+    cout << "\t |    0 TO EXIT THE PROGRAM                       |" << endl;
+    cout << "\t |                                                |" << endl;
+    cout << "\t +------------------------------------------------+" << endl;
+    cout << "\t   Option: "; cin >> option;
+    return(option);
+}
+//-----------------------------------------------------------------------------------------------------------------
 char RunAgain(){
     char option = ' ';
     system("cls");
@@ -80,6 +109,7 @@ char RunAgain(){
 int main() {
     cout << fixed << setprecision(2);
 
+    /*
     tLista* idades = new tLista;
 
     iniciarLista(idades);
@@ -102,23 +132,30 @@ int main() {
     printarLista(idades);
 
     system("pause");
+    */
 
-    FirstWindow();
+    //FirstWindow();
 
-    SecondWindow();
-
-    tInvestimento object;
-
+    //SecondWindow();
 
     bool close = true;
     do{
-        object.DefiningCapital();
-        object.DefiningTime();
-        object.DefiningRate();
-        object.ConvertRate();
-        object.SimpleInterest();
-        system("pause");
-        RunAgain();
+        int option = ThirdWindow();
+        if (option == 1){
+            gravar();
+        }else if (option == 2){
+            adicionar();
+        }else if (option == 3){
+            ler();
+        }else{exit(EXIT_FAILURE);}
 
-    }while ((close == true));
+        tInvestimento object;
+        //object.DefiningCapital();
+        //object.DefiningTime();
+        //object.DefiningRate();
+        //object.ConvertRate();
+        //object.SimpleInterest();
+        //RunAgain();
+
+    }while ((close ==true ));
 }
