@@ -1,0 +1,31 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int main(){
+
+    fstream myFyle;//declara uma variavel pra abrir o arquivo;
+
+    //cria um arquivo limpo e escreve nele;
+    myFyle.open("data.txt", ios::out);
+    myFyle << "Hello";
+    myFyle.close();
+
+    //abre um arquivo existente e adiciona nele outras coisas;
+    myFyle.open("data.txt", ios::app);
+    myFyle << "-world";
+    myFyle.close();
+
+    //cria um arquivo limpo e escreve nele;
+    myFyle.open("data.txt", ios::in);
+    string c;
+    if(myFyle.is_open()){
+        while(!myFyle.eof()) {
+            myFyle >> c;
+            cout << c;
+        }
+    }else{cout << "error...";}
+
+    myFyle.close();
+}
