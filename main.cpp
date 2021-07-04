@@ -109,53 +109,39 @@ char RunAgain(){
 int main() {
     cout << fixed << setprecision(2);
 
-    /*
-    tLista* idades = new tLista;
+    tLista* pDatas = new tLista;
 
-    iniciarLista(idades);
-
-    int joao=10, maria=20, marcos=30, julho=40;
-    incluirElemento(idades, joao);
-    incluirElemento(idades, maria);
-    incluirElemento(idades, marcos);
-
-
-    cout << "elemento: ";
-    printarLista(idades);
-
-    incluirElemento(idades, julho);
-    cout << "elemento: ";
-    printarLista(idades);
-
-    excluirPosicao(idades, 2);
-    cout << "elemento: ";
-    printarLista(idades);
-
-    system("pause");
-    */
+    iniciarLista(pDatas);
 
     //FirstWindow();
 
     //SecondWindow();
 
+    tInvestimento object;
+
     bool close = true;
-    do{
+    while (close){
         int option = ThirdWindow();
         if (option == 1){
-            gravar();
+            int numberItens = object.TimesToRun();
+            for (int i=0; i<numberItens; i++){
+                float capital = object.DefiningCapital();
+                incluirElemento(pDatas, capital);
+                float time = object.DefiningTime();
+                incluirElemento(pDatas, time);
+                float rate = object.DefiningRate();
+                incluirElemento(pDatas, rate);
+            }
+            gravar(pDatas);
+            object.ConvertRate();
+            object.SimpleInterest();
+            RunAgain();
         }else if (option == 2){
             adicionar();
         }else if (option == 3){
             ler();
         }else{exit(EXIT_FAILURE);}
 
-        tInvestimento object;
-        //object.DefiningCapital();
-        //object.DefiningTime();
-        //object.DefiningRate();
-        //object.ConvertRate();
-        //object.SimpleInterest();
-        //RunAgain();
 
-    }while ((close ==true ));
+    }
 }

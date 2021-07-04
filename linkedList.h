@@ -1,9 +1,9 @@
 #include <iostream>
-//codigo criado em aula para lista encadeada
+
 using namespace std;
 
 struct tNo{
-    int info;
+    float info;
     tNo* proximo;
 };
 //---------------------------------------------------------------------------------------------------
@@ -33,7 +33,7 @@ bool finalLista(tLista* pLista){
     return (pLista->marcador == NULL);
 }
 //---------------------------------------------------------------------------------------------------
-tNo* criaNo(int item){
+tNo* criaNo(float item){
     tNo* no = new tNo;
 
     no->info = item;
@@ -42,7 +42,7 @@ tNo* criaNo(int item){
     return no;
 }
 //---------------------------------------------------------------------------------------------------
-void incluirElemento(tLista* pLista, int info){
+void incluirElemento(tLista* pLista, float info){
     tNo* no;
     no = criaNo(info);
 
@@ -54,11 +54,11 @@ void incluirElemento(tLista* pLista, int info){
     pLista->tamanho++;
 }
 //---------------------------------------------------------------------------------------------------
-void printarLista(tLista* pLista){
+void imprimirLista(tLista* pLista){
     pLista->marcador = pLista->primeiro;
 
     while(!finalLista(pLista)){
-        int informacao = pLista->marcador->info;
+        float informacao = pLista->marcador->info;
         cout << informacao << " ";
         pLista->marcador = pLista->marcador->proximo;
     }
@@ -71,14 +71,12 @@ void excluirPosicao(tLista* pLista, int pos){
 
     if(!listaVazia(pLista)){
         pLista->marcador = pLista->primeiro;
-        if(pos < obterTamanho(pLista)){
+        while(!finalLista(pLista)){
             if (pos==0){pLista->primeiro = pLista->marcador->proximo;}
             else{
-                for(int i = 0; i < pos; i++){
-                    anterior = pLista->marcador;
-                    pLista->marcador = pLista->marcador->proximo;
-                    aux = pLista->marcador->proximo;
-                }
+                anterior = pLista->marcador;
+                pLista->marcador = pLista->marcador->proximo;
+                aux = pLista->marcador->proximo;
             anterior->proximo = aux;
             }
         }

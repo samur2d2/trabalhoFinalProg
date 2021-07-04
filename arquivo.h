@@ -3,11 +3,27 @@
 
 using namespace std;
 
-fstream myFyle;//declara uma variavel pra abrir o arquivo;
-void gravar(){
-    //cria um arquivo limpo e escreve nele;
+fstream myFyle;
+void gravar(tLista* pLista){
+    float data;
+
     myFyle.open("database.txt", ios::out);
-    myFyle << "Hello";
+    pLista->marcador = pLista->primeiro;
+
+    while(!finalLista(pLista)){
+        data = pLista->marcador->info;
+        myFyle << "\n" << data << " ";
+        pLista->marcador = pLista->marcador->proximo;
+
+        data = pLista->marcador->info;
+        myFyle << data << " ";
+        pLista->marcador = pLista->marcador->proximo;
+
+        data = pLista->marcador->info;
+        myFyle << data;
+        pLista->marcador = pLista->marcador->proximo;
+    }
+
     myFyle.close();
 }
 void adicionar(){
