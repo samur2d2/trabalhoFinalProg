@@ -1,89 +1,99 @@
+#ifndef tInvestimento_h
+#define tInvestimento_h
+#include <math.h>
+#include <iomanip>
 #include <iostream>
 
 using namespace std;
 
-struct tNo{
-    float info;
-    tNo* proximo;
-};
-//---------------------------------------------------------------------------------------------------
-struct tLista{
-    tNo* primeiro;
-    tNo* ultimo;
-    tNo* marcador;
-    int tamanho;
-};
-//---------------------------------------------------------------------------------------------------
-void iniciarLista(tLista* pLista){
-    pLista->primeiro = NULL;
-    pLista->ultimo = NULL;
-    pLista->marcador = NULL;
-    pLista->tamanho = 0;
-}
-//---------------------------------------------------------------------------------------------------
-int obterTamanho(tLista* pLista){
-    return (pLista->tamanho);
-}
-//---------------------------------------------------------------------------------------------------
-bool listaVazia(tLista* pLista){
-    return (pLista->tamanho==0);
-}
-//---------------------------------------------------------------------------------------------------
-bool finalLista(tLista* pLista){
-    return (pLista->marcador == NULL);
-}
-//---------------------------------------------------------------------------------------------------
-tNo* criaNo(float item){
-    tNo* no = new tNo;
+//consulta realizada dia 20/06/2021 no site do tesouro direto e nubank;
+const float cdbRate[3] = {0.003586, 0.021714, 0.0439}; //rendimento de 2019; anual[2] mensal[0
+const float cdiRate[3] = {0.002263, 0.013656, 0.0275}; //rendimento acumulado dos ultimos 12 meses; anual[2] mensal[0]
+const float poupancaRate[3] = {0.003626, 0.021958, 0.0444}; //rendimento médio; anual[2] mensal[0]
+const float TS2024Rate[3] = {0.004566, 0.027715, 0.0562}; //tesouro selic 2024;
 
-    no->info = item;
-    no->proximo = NULL;
+typedef struct{
+    float startingCapital=0;
+    float rate[3]={0}; //mensal[0], semestral[1] and anual[2];
+    float time=0;
+    float simpleInterest=0; //simple interest income
+    float simpleAmount=0; //amount applied to simple interest
+    float compoundInterest=0;
+    float compoundAmount=0;
+    float cdiInterest, cdbInterest, poupancaInterest, ts2024Interest;
+    float cdiAmount, cdbAmount, poupancaAmount, ts2024Amount;
+    int type=0;
+}DefValues;
 
-    return no;
-}
-//---------------------------------------------------------------------------------------------------
-void incluirElemento(tLista* pLista, float info){
-    tNo* no;
-    no = criaNo(info);
-
-    if (listaVazia(pLista)){pLista->primeiro = no;}
-    else{pLista->ultimo->proximo = no;}
-
-    pLista->ultimo = no;
-    pLista->marcador = no;
-    pLista->tamanho++;
-}
-//---------------------------------------------------------------------------------------------------
-void imprimirLista(tLista* pLista){
-    pLista->marcador = pLista->primeiro;
-
-    while(!finalLista(pLista)){
-        float informacao = pLista->marcador->info;
-        cout << informacao << " ";
-        pLista->marcador = pLista->marcador->proximo;
+typedef struct{
+    DefValues value;
+//----------------------------------------------------------------------------------------------------
+    float DefiningCapital(){
+        system("cls");
+        for (int i=0; i<3; i++){cout << endl;}
+        cout << "\t +------------------------------------------------+" << endl;
+        cout << "\t |                                                |" << endl;
+        cout << "\t |          PLEASE TELL ME HOW MUCH YOU           |" << endl;
+        cout << "\t |           HAVE TO INVEST HIGH NOW              |" << endl;
+        cout << "\t |                                                |" << endl;
+        cout << "\t +------------------------------------------------+" << endl;
+        cout << "\t   I have: R$ "; cin >> value.startingCapital;
+        return (value.startingCapital);
     }
-    cout << endl;
-}
-//---------------------------------------------------------------------------------------------------
-void DellElements(tLista* pLista, int pos){
-    tNo* anterior;
-    tNo* aux;
-
-    if(!listaVazia(pLista)){
-        pLista->marcador = pLista->primeiro;
-
-        if(pos < obterTamanho(pLista)){
-
-            if (pos==0){pLista->primeiro = pLista->marcador->proximo;}
-            else{
-                anterior = pLista->marcador;
-                pLista->marcador = pLista->marcador->proximo;
-                aux = pLista->marcador->proximo;
-            }
-            anterior->proximo = aux;
-
+//----------------------------------------------------------------------------------------------------
+    float DefiningRate(){
+        system("cls");
+        for (int i=0; i<3; i++){cout << endl;}
+        cout << "\t +------------------------------------------------+" << endl;
+        cout << "\t |                                                |" << endl;
+        cout << "\t |        PLEASE TELL ME, IN PERCENTAGE,          |" << endl;
+        cout << "\t |       WHAT IS THE ANUAL INTEREST RATE          |" << endl;
+        cout << "\t |                                                |" << endl;
+        cout << "\t +------------------------------------------------+" << endl;
+        cout << "\t   The rate is: "; cin >> value.rate[2];
+        value.rate[2] = value.rate[2] / 100;
+        return (value.rate[2]);
+    }
+//----------------------------------------------------------------------------------------------------
+    float TimesToRun(){
+        system("cls");
+        int numberItens=0;
+        for (int i=0; i<3; i++){cout << endl;}
+        cout << "\t +--------------------------------------------+" << endl;
+        cout << "\t |                                            |" << endl;
+        cout << "\t |         PLEASE TELL ME HOW MUCH            |" << endl;
+        cout << "\t |       INFORMATIONS YOU WANT TO ADD         |" << endl;
+        cout << "\t |                                            |" << endl;
+        cout << "\t |        (including starting capital,        |" << endl;
+        cout << "\t |              rate and time )               |" << endl;
+        cout << "\t |                                            |" << endl;
+        cout << "\t +--------------------------------------------+" << endl;
+        cout << "\t   I want: "; cin >> numberItens;
+        return (numberItens);
+    }
+//----------------------------------------------------------------------------------------------------
+    float DefiningTime(){
+        system("cls");
+        for (int i=0; i<3; i++){cout << endl;}
+        cout << "\t +------------------------------------------------+" << endl;
+        cout << "\t |                                                |" << endl;
+        cout << "\t |      PLEASE TELL ME WHAT IS                    |" << endl;
+        cout << "\t |      THE TIME OF THE APLICATION                |" << endl;
+        cout << "\t |                                                |" << endl;
+        cout << "\t +------------------------------------------------+" << endl;
+        cout << "\t |                                                |" << endl;
+        cout << "\t |    - FIRST YOU TELL ME THE TIME.               |" << endl;
+        cout << "\t |    - THEN YOU TELL ME IF THE NUMBER IS         |" << endl;
+        cout << "\t |      IN YEARS (enter 1) OR MONTHS (enter 2).   |" << endl;
+        cout << "\t |                                                |" << endl;
+        cout << "\t +------------------------------------------------+" << endl;
+        cout << "\t   Time: "; cin >> value.time;
+        cout << "\t   Type: "; cin >> value.type;
+        if (value.type == 2){
+            value.time = value.time/12;
         }
+        return (value.time);
     }
-}
+}tInvestimento;
 
-
+#endif

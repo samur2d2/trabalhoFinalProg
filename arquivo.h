@@ -45,18 +45,22 @@ void addNewElements(tLista* pLista){
         myFyle << data;
         pLista->marcador = pLista->marcador->proximo;
     }
-
     myFyle.close();
 }
 void readTheFile(tLista* pLista){
-    //cria um arquivo limpo e escreve nele;
+    pLista->marcador = pLista->primeiro;
     myFyle.open("database.txt", ios::in);
-    string c;
+    float readData;
     if(myFyle.is_open()){
         while(!myFyle.eof()) {
-            myFyle >> c;
-            cout << c << endl;
+            myFyle >> readData;
+            incluirElemento(pLista, readData);
+            myFyle >> readData;
+            incluirElemento(pLista, readData);
+            myFyle >> readData;
+            incluirElemento(pLista, readData);
         }
+        imprimirLista(pLista);
     }else{cout << "error...";}
     myFyle.close();
     system("pause");

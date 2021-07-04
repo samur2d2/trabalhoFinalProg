@@ -141,10 +141,13 @@ int main() {
 
         }else if (option == 3){
             readTheFile(pDatas);
+            
+            int len = obterTamanho(pDatas)-1;
+            for(int i=len; i>0; i--){
+                DellElements(pDatas, i);
+            }
+            iniciarLista(pDatas);
         }else{exit(EXIT_FAILURE);}
-
-                object.ConvertRate();
-                object.SimpleInterest();
 
     }
 }

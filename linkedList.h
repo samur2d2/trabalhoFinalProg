@@ -71,14 +71,17 @@ void DellElements(tLista* pLista, int pos){
 
     if(!listaVazia(pLista)){
         pLista->marcador = pLista->primeiro;
-        while(!finalLista(pLista)){
+
+        if(pos < obterTamanho(pLista)){
+
             if (pos==0){pLista->primeiro = pLista->marcador->proximo;}
             else{
                 anterior = pLista->marcador;
                 pLista->marcador = pLista->marcador->proximo;
                 aux = pLista->marcador->proximo;
-            anterior->proximo = aux;
             }
+            anterior->proximo = aux;
+
         }
     }
 }
