@@ -77,7 +77,7 @@ void imprimirLista(tLista* pLista){
         pLista->marcador = pLista->marcador->proximo;
 
         informacao = pLista->marcador->info;
-        cout << "\t |           Anual Rate: " << setw(10) <<informacao << " %       |" << endl;
+        cout << "\t |           Anual Rate: " << setw(10) <<informacao*100 << " %       |" << endl;
         pLista->marcador = pLista->marcador->proximo;
         cout << "\t |                                          |" << endl;
     }
