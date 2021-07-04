@@ -3,66 +3,66 @@
 
 using namespace std;
 
-fstream myFyle;
+fstream myFile;
 void writeOnANewFile(tLista* pLista){
     float data;
 
-    myFyle.open("database.txt", ios::out);
+    myFile.open("database.txt", ios::out);
     pLista->marcador = pLista->primeiro;
 
     while(!finalLista(pLista)){
         data = pLista->marcador->info;
-        myFyle << "\n" << data << " ";
+        myFile << "\n" << data << " ";
         pLista->marcador = pLista->marcador->proximo;
 
         data = pLista->marcador->info;
-        myFyle << data << " ";
+        myFile << data << " ";
         pLista->marcador = pLista->marcador->proximo;
 
         data = pLista->marcador->info;
-        myFyle << data;
+        myFile << data;
         pLista->marcador = pLista->marcador->proximo;
     }
 
-    myFyle.close();
+    myFile.close();
 }
 void addNewElements(tLista* pLista){
     float data;
 
-    myFyle.open("database.txt", ios::app);
+    myFile.open("database.txt", ios::app);
     pLista->marcador = pLista->primeiro;
 
     while(!finalLista(pLista)){
         data = pLista->marcador->info;
-        myFyle << "\n" << data << " ";
+        myFile << "\n" << data << " ";
         pLista->marcador = pLista->marcador->proximo;
 
         data = pLista->marcador->info;
-        myFyle << data << " ";
+        myFile << data << " ";
         pLista->marcador = pLista->marcador->proximo;
 
         data = pLista->marcador->info;
-        myFyle << data;
+        myFile << data;
         pLista->marcador = pLista->marcador->proximo;
     }
-    myFyle.close();
+    myFile.close();
 }
 void readTheFile(tLista* pLista){
     pLista->marcador = pLista->primeiro;
-    myFyle.open("database.txt", ios::in);
+    myFile.open("database.txt", ios::in);
     float readData;
-    if(myFyle.is_open()){
-        while(!myFyle.eof()) {
-            myFyle >> readData;
+    if(myFile.is_open()){
+        while(!myFile.eof()) {
+            myFile >> readData;
             incluirElemento(pLista, readData);
-            myFyle >> readData;
+            myFile >> readData;
             incluirElemento(pLista, readData);
-            myFyle >> readData;
+            myFile >> readData;
             incluirElemento(pLista, readData);
         }
         imprimirLista(pLista);
     }else{cout << "error...";}
-    myFyle.close();
+    myFile.close();
     system("pause");
 }
 
