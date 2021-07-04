@@ -65,7 +65,7 @@ void imprimirLista(tLista* pLista){
     cout << endl;
 }
 //---------------------------------------------------------------------------------------------------
-void excluirPosicao(tLista* pLista, int pos){
+void DellElements(tLista* pLista, int pos){
     tNo* anterior;
     tNo* aux;
 

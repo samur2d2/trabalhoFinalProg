@@ -48,7 +48,7 @@ void addNewElements(tLista* pLista){
 
     myFyle.close();
 }
-void ler(){
+void readTheFile(tLista* pLista){
     //cria um arquivo limpo e escreve nele;
     myFyle.open("database.txt", ios::in);
     string c;

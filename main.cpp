@@ -117,7 +117,7 @@ int main() {
     bool close = true;
     while (close){
         int option = ThirdWindow();
-        if ((option == 1)|| (option == 2)){
+        if ((option == 1) || (option == 2)){
             int numberItens = object.TimesToRun();
             for (int i=0; i<numberItens; i++){
                 float capital = object.DefiningCapital();
@@ -132,9 +132,15 @@ int main() {
             }else if(option == 2){
                 addNewElements(pDatas);
             }
-            //RunAgain();
+
+            int len = obterTamanho(pDatas)-1;
+            for(int i=len; i>0; i--){
+                DellElements(pDatas, i);
+            }
+            iniciarLista(pDatas);
+
         }else if (option == 3){
-            ler();
+            readTheFile(pDatas);
         }else{exit(EXIT_FAILURE);}
 
                 object.ConvertRate();
