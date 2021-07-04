@@ -1,8 +1,3 @@
-//LANCEI O DESAFIO
-//CADA ERRO É 1 SHOT DE CACHAÇA
-//"Let the game begin!" - Jigsaw
-//Total de perdas: 5 shots
-
 #include <iostream>
 #include <cstdlib>
 #include <stdlib.h>
@@ -122,7 +117,7 @@ int main() {
     bool close = true;
     while (close){
         int option = ThirdWindow();
-        if (option == 1){
+        if ((option == 1)|| (option == 2)){
             int numberItens = object.TimesToRun();
             for (int i=0; i<numberItens; i++){
                 float capital = object.DefiningCapital();
@@ -132,16 +127,18 @@ int main() {
                 float rate = object.DefiningRate();
                 incluirElemento(pDatas, rate);
             }
-            gravar(pDatas);
-            object.ConvertRate();
-            object.SimpleInterest();
-            RunAgain();
-        }else if (option == 2){
-            adicionar();
+            if (option == 1){
+                writeOnANewFile(pDatas);
+            }else if(option == 2){
+                addNewElements(pDatas);
+            }
+            //RunAgain();
         }else if (option == 3){
             ler();
         }else{exit(EXIT_FAILURE);}
 
+                object.ConvertRate();
+                object.SimpleInterest();
 
     }
 }

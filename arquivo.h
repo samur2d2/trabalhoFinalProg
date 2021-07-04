@@ -4,7 +4,7 @@
 using namespace std;
 
 fstream myFyle;
-void gravar(tLista* pLista){
+void writeOnANewFile(tLista* pLista){
     float data;
 
     myFyle.open("database.txt", ios::out);
@@ -26,10 +26,26 @@ void gravar(tLista* pLista){
 
     myFyle.close();
 }
-void adicionar(){
-    //abre um arquivo existente e adiciona nele outras coisas;
+void addNewElements(tLista* pLista){
+    float data;
+
     myFyle.open("database.txt", ios::app);
-    myFyle << "\nworld";
+    pLista->marcador = pLista->primeiro;
+
+    while(!finalLista(pLista)){
+        data = pLista->marcador->info;
+        myFyle << "\n" << data << " ";
+        pLista->marcador = pLista->marcador->proximo;
+
+        data = pLista->marcador->info;
+        myFyle << data << " ";
+        pLista->marcador = pLista->marcador->proximo;
+
+        data = pLista->marcador->info;
+        myFyle << data;
+        pLista->marcador = pLista->marcador->proximo;
+    }
+
     myFyle.close();
 }
 void ler(){
