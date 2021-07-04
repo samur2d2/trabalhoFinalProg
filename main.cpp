@@ -108,9 +108,9 @@ int main() {
 
     iniciarLista(pDatas);
 
-    //FirstWindow();
+    FirstWindow();
 
-    //SecondWindow();
+    SecondWindow();
 
     tInvestimento object;
 
