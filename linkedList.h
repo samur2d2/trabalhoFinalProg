@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -55,13 +56,32 @@ void incluirElemento(tLista* pLista, float info){
 }
 //---------------------------------------------------------------------------------------------------
 void imprimirLista(tLista* pLista){
+    system("cls");
+    for (int i=0; i<3; i++){cout << endl;}
     pLista->marcador = pLista->primeiro;
+    float informacao;
 
+    cout << "\t +------------------------------------------+" << endl;
+    cout << "\t |                                          |" << endl;
+    cout << "\t |    INFORMATIONS ABOUT THE INVESTMENT     |" << endl;
+    cout << "\t |                                          |" << endl;
     while(!finalLista(pLista)){
-        float informacao = pLista->marcador->info;
-        cout << informacao << " ";
+        cout << "\t +------------------------------------------+" << endl;
+        cout << "\t |                                          |" << endl;
+        informacao = pLista->marcador->info;
+        cout << "\t |     Starting Capital: " << setw(10) << informacao << " R$      |" << endl;
         pLista->marcador = pLista->marcador->proximo;
+
+        informacao = pLista->marcador->info;
+        cout << "\t |     Application Time: " << setw(10) <<informacao << " years   |" << endl;
+        pLista->marcador = pLista->marcador->proximo;
+
+        informacao = pLista->marcador->info;
+        cout << "\t |           Anual Rate: " << setw(10) <<informacao << " %       |" << endl;
+        pLista->marcador = pLista->marcador->proximo;
+        cout << "\t |                                          |" << endl;
     }
+    cout << "\t +------------------------------------------+" << endl;
     cout << endl;
 }
 //---------------------------------------------------------------------------------------------------
